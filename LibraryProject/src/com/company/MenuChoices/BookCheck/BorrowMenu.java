@@ -8,10 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Calendar;
+import java.util.Date;
 
 
 // CHANGE THIS ENTIRELY THIS IS BOOKADDER
@@ -22,12 +21,13 @@ import java.sql.Statement;
 
 
 public class BorrowMenu {
+    private static Date today;
     private static String bookName;
     private static String authorName;
     private static int numOfBooks;
 
     private static JFrame borrowMenuFrame;
-    private static JTextField borrowerNameField;
+    private static JTextField customerNameField;
     private static JTextField loanDurationField;
     private static JTextField bookNameField;
     private static JTextField authorNameField;
@@ -36,15 +36,15 @@ public class BorrowMenu {
     public static void addComponentsToPane(Container pane) {
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
 
-        addALablel("Enter Borrower Name:",pane);
-        borrowerNameField=addATextField("Name ",pane,false);
+        addALablel("Enter Customer Name:",pane);
+        customerNameField=addATextField("Name ",pane,false);
         addALablel("Loan duration(months)",pane);
         loanDurationField=addATextField("3",pane,false);
         addALablel("Book Name",pane);
         bookNameField=addATextField(bookName,pane,true);
         addALablel("Author Name",pane);
         authorNameField=addATextField(authorName,pane,true);
-        addALablel("Phone Number",pane);
+        addALablel("Customer Phone Number",pane);
         phoneNumberField=addATextField("0727587574",pane,false);
         addAButton("Submit",pane,loanBook());
 
@@ -99,10 +99,34 @@ public class BorrowMenu {
                             "set numBooksOnLoan=numBooksOnLoan+1,\n" +
                             "numAvailableBooks=numAvailableBooks-1\n" +
                             "where\n" +
-                            "bookName='"+bookNameField.getText().toUpperCase()+"'"+" and bookAuthor='"+authorNameField.getText().toUpperCase()+"'");
-
+                            "bookName='" + bookNameField.getText().toUpperCase() + "'" + " and bookAuthor='" + authorNameField.getText().toUpperCase() + "'");
+                    myConn.close();
+                }
+                catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+                try {
+                    Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
+                    //2. Create a statement
+                    Statement myStmt = myConn.createStatement();
                     // ADD A NEW LOAN
+                    Calendar today = Calendar.getInstance();
+                    today.set(Calendar.HOUR_OF_DAY, 0); // same for minutes and seconds
+                    System.out.println(today.getTimeInMillis());
+                    java.sql.Date todaysSQLDate = new java.sql.Date(today.getTimeInMillis());
+                    System.out.println("insert into sql_library.loans \n" +
+                            "values ('" + bookNameField.getText().toUpperCase() + "','" +
+                            authorNameField.getText().toUpperCase() + "'," +
+                            "DATE_ADD('" + todaysSQLDate + "'," + "interval " + loanDurationField.getText() +
+                            " month),'" + customerNameField.getText().toUpperCase() + "','" + phoneNumberField.getText() + "')");
 
+                    // WORKS IN MYSQL BUT NOT IN JAVA FILE
+                    myStmt.executeUpdate("insert into sql_library.loans \n" +
+                            "values ('" + bookNameField.getText().toUpperCase() + "','" +
+                            authorNameField.getText().toUpperCase() + "','" +
+                            "DATE_ADD('" + todaysSQLDate + "'," + "interval " + loanDurationField.getText() +
+                            " month),'" + customerNameField.getText().toUpperCase() + "','" + phoneNumberField.getText() + "')");
+                    myConn.close();
                 }
                 catch (Exception ex){
                     ex.printStackTrace();
@@ -137,6 +161,9 @@ public class BorrowMenu {
         BorrowMenu.bookName=bookName;
         BorrowMenu.authorName=authorName;
         BorrowMenu.numOfBooks=numOfBooks;
+
+        today = Calendar.getInstance().getTime();
+        System.out.println(today);
 
 
         //Set up the content pane.
