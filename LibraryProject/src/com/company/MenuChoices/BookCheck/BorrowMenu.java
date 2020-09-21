@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+
 // CHANGE THIS ENTIRELY THIS IS BOOKADDER
 
 // ADD A FUNCTION THAT ADDS A LOAN OBJECT
@@ -72,6 +73,7 @@ public class BorrowMenu {
         textField.setForeground(Color.BLACK);
         if (writeYourself){
             textField.setText(text);
+            textField.setEditable(false);
         }
         textField.setFont(new Font("SansSerif",Font.CENTER_BASELINE,16));
         textField.setMaximumSize(new Dimension(400,50));
@@ -81,55 +83,54 @@ public class BorrowMenu {
     }
 
     private static ActionListener loanBook(){
-        //subtract from the number of those type of books 1
-        // AND ADD TO THE NUMBER OF ONLOANBOOKS 1
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                if(!customerNameField.getText().equals("")&&
+                isNumeric(loanDurationField.getText())&&
+                !phoneNumberField.getText().equals("")) {
 
-                try {
-                    //1.Get a connection to database
-                    Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
-                    //2. Create a statement
-                    Statement myStmt = myConn.createStatement();
-                    //3.
-                    //FIRSTLY SWITCH BOOKS VALUES
-                    myStmt.executeUpdate("update sql_library.books \n" +
-                            "set numBooksOnLoan=numBooksOnLoan+1,\n" +
-                            "numAvailableBooks=numAvailableBooks-1\n" +
-                            "where\n" +
-                            "bookName='" + bookNameField.getText().toUpperCase() + "'" + " and bookAuthor='" + authorNameField.getText().toUpperCase() + "'");
-                    myConn.close();
-                }
-                catch (Exception exc) {
-                    exc.printStackTrace();
-                }
-                try {
-                    Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
-                    //2. Create a statement
-                    Statement myStmt = myConn.createStatement();
-                    // ADD A NEW LOAN
-                    Calendar today = Calendar.getInstance();
-                    today.set(Calendar.HOUR_OF_DAY, 0); // same for minutes and seconds
-                    System.out.println(today.getTimeInMillis());
-                    java.sql.Date todaysSQLDate = new java.sql.Date(today.getTimeInMillis());
-                    System.out.println("insert into sql_library.loans \n" +
-                            "values ('" + bookNameField.getText().toUpperCase() + "','" +
-                            authorNameField.getText().toUpperCase() + "'," +
-                            "DATE_ADD('" + todaysSQLDate + "'," + "interval " + loanDurationField.getText() +
-                            " month),'" + customerNameField.getText().toUpperCase() + "','" + phoneNumberField.getText() + "')");
+                    try {
+                        //1.Get a connection to database
+                        Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
+                        //2. Create a statement
+                        Statement myStmt = myConn.createStatement();
+                        //3.
+                        //FIRSTLY SWITCH BOOKS VALUES
+                        myStmt.executeUpdate("update sql_library.books \n" +
+                                "set numBooksOnLoan=numBooksOnLoan+1,\n" +
+                                "numAvailableBooks=numAvailableBooks-1\n" +
+                                "where\n" +
+                                "bookName='" + bookNameField.getText().toUpperCase() + "'" + " and bookAuthor='" + authorNameField.getText().toUpperCase() + "'");
+                        myConn.close();
+                    } catch (Exception exc) {
+                        exc.printStackTrace();
+                    }
+                    try {
+                        Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
+                        Statement myStmt = myConn.createStatement();
 
-                    // WORKS IN MYSQL BUT NOT IN JAVA FILE
-                    myStmt.executeUpdate("insert into sql_library.loans \n" +
-                            "values ('" + bookNameField.getText().toUpperCase() + "','" +
-                            authorNameField.getText().toUpperCase() + "','" +
-                            "DATE_ADD('" + todaysSQLDate + "'," + "interval " + loanDurationField.getText() +
-                            " month),'" + customerNameField.getText().toUpperCase() + "','" + phoneNumberField.getText() + "')");
-                    myConn.close();
-                }
-                catch (Exception ex){
-                    ex.printStackTrace();
+
+                        Calendar returnDate = Calendar.getInstance();
+                        returnDate.add(Calendar.MONTH, Integer.parseInt(loanDurationField.getText())); // same for minutes and seconds
+                        java.sql.Date aux = new java.sql.Date(returnDate.getTimeInMillis());
+                        String dateOfReturn = aux.toString();
+                        // calculated the dateOfReturn
+
+                        // ADD A NEW LOAN
+
+                        myStmt.executeUpdate("insert into sql_library.loans \n" +
+                                "values ('" + bookNameField.getText().toUpperCase() + "','" +
+                                authorNameField.getText().toUpperCase() + "','" +
+                                dateOfReturn + "','" + customerNameField.getText().toUpperCase() +
+                                "','" + phoneNumberField.getText() + "')");
+
+                        myConn.close();
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
 
 
@@ -140,6 +141,15 @@ public class BorrowMenu {
             }
         };
         return actionListener;
+    }
+
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 
 

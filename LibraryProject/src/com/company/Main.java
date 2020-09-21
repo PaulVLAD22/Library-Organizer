@@ -9,6 +9,12 @@ public class Main {
         // IN DB OBJECTS BOOKS->String name,String authorName,String Category, int numOfAvailableBooks, int booksOnLoan
         //               LOAN-> BOOKNAME,BookAuthor,DateOfLoanEnd,LoanerFirstName,LoanerLastName,LoanerPhoneNumber
         Menu.createAndShowGUI();
+        // FA BUTONU CU VIEW LOANS
+        // FA BUTON CARE ARATA CA A VENIT INAPOI CU CARTEA INDIVIDUL
+        // (STERGE LOAN-ul respectiv din db)
+
+
+
 
     }
 }
