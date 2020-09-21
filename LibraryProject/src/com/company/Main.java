@@ -7,7 +7,6 @@ public class Main {
         // IN DB OBJECTS BOOKS->String name,String authorName,String Category, int numOfAvailableBooks, int booksOnLoan
         //               LOAN-> BOOKNAME,BookAuthor,DateOfLoanEnd,LoanerFirstName,LoanerLastName,LoanerPhoneNumber
 
-        //example sql
         Menu.createAndShowGUI();
     }
 }

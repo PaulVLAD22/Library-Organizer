@@ -77,7 +77,7 @@ public class BookCheckResult {
                 Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
                 //2. Create a statement
                 Statement myStmt = myConn.createStatement();
-                //3. Execute a sql query
+                //3. Get information about the certain book
                 ResultSet myRs = myStmt.executeQuery("select * from books where bookName='" + bookName.toUpperCase() + "' and bookAuthor='" + authorName.toUpperCase() + "'");
                 //4. Process the result set
                 while (myRs.next()) {

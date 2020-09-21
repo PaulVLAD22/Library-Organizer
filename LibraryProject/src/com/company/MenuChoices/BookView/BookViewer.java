@@ -55,9 +55,9 @@ public class BookViewer {
             Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
             //2. Create a statement
             Statement myStmt = myConn.createStatement();
-            //3. Execute a sql query
+            //3. Take info a about all books
             ResultSet myRs = myStmt.executeQuery("select * from books");
-            //4. Process the result set
+            //4. store data in a String matrix
             while (myRs.next()) {
                 bookName=myRs.getString("bookName");
                 bookAuthor=myRs.getString("bookAuthor");

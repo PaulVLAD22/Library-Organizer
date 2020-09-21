@@ -71,7 +71,7 @@ public class BookDeleter {
                         Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
                         //2. Create a statement
                         Statement myStmt = myConn.createStatement();
-                        //3. Execute a sql query
+                        //3. Update availableBooks, booksonLoan or deleteBook
 
                         switch (subtractTypeOfBooks.getText().toUpperCase()) {
                             case ("AVAILABLE"):

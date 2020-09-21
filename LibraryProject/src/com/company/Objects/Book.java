@@ -70,13 +70,9 @@ public class Book {
             Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_library?serverTimezone=EET", "root", ServerPass.serverPass);
             //2. Create a statement
             Statement myStmt = myConn.createStatement();
-            //3. Execute a sql query
+            //3. Insert book into table
             myStmt.executeUpdate("insert into books values("+"'"+bookName.toUpperCase()+"'"+","+"'"+authorName.toUpperCase()+"'"+","+"'"+categoryName.toUpperCase()+"'"+","+numOfAvailableBooks+",0)");
-            //4. Process the result set
-            ResultSet myRs = myStmt.executeQuery("select * from books");
-            while (myRs.next()) {
-                System.out.println(myRs.getString("bookName") + "," + myRs.getString("bookAuthor"));
-            }
+
             myConn.close();
         }
         catch (Exception ex){
