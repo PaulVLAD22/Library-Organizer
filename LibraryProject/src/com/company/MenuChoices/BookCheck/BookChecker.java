@@ -71,7 +71,7 @@ public class BookChecker {
         bookCheckerFrame.setPreferredSize(new Dimension(600,400));
         bookCheckerFrame.setMaximumSize(new Dimension(600,400));
         bookCheckerFrame.setMinimumSize(new Dimension(600,400));
-        bookCheckerFrame.setTitle("Add a new book");
+        bookCheckerFrame.setTitle("Check for a Book");
 
         //Set up the content pane.
         addComponentsToPane(bookCheckerFrame.getContentPane());

@@ -73,8 +73,7 @@ public class BookViewer {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        String [] a = {"AAAAAAAAAAAAAAAAAAAAAAAAAAAA","A","A","A","A"};
-        data[1]=a;
+
         return data;
     }
 
@@ -90,7 +89,7 @@ public class BookViewer {
         //Create and set up the window
         bookViewerFrame = new JFrame("BoxLayoutDemo");
         bookViewerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        bookViewerFrame.setTitle("View Books");
+        bookViewerFrame.setTitle("View Loans");
         bookViewerFrame.setPreferredSize(new Dimension(1400,768));
         bookViewerFrame.setMaximumSize(new Dimension(1400,768));
         bookViewerFrame.setMinimumSize(new Dimension(1400,768));

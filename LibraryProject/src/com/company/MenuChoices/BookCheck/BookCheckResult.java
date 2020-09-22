@@ -121,7 +121,7 @@ public class BookCheckResult {
         bookCheckResultFrame.setPreferredSize(new Dimension(450,300));
         bookCheckResultFrame.setMaximumSize(new Dimension(450,300));
         bookCheckResultFrame.setMinimumSize(new Dimension(450,300));
-        bookCheckResultFrame.setTitle("Add a new book");
+        bookCheckResultFrame.setTitle("BookCheck Results");
 
         // assign values to attributes
         BookCheckResult.bookName=bookName;

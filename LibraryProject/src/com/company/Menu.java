@@ -5,6 +5,8 @@ import com.company.MenuChoices.BookAdders.BookCopiesAdder;
 import com.company.MenuChoices.BookCheck.BookChecker;
 import com.company.MenuChoices.BookDeleter;
 import com.company.MenuChoices.BookView.BookViewer;
+import com.company.MenuChoices.LoanDeleter;
+import com.company.MenuChoices.LoanView.LoanViewer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,13 +22,8 @@ public class Menu {
         addAButton("Add new copies of book",pane,openAddCopiesMenu());
         addAButton("Delete books", pane, openDeleteBookMenu());
         addAButton("View all books", pane, openViewBooksMenu());
-        addAButton("View borrowed books information", pane, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //View all loans
-
-            }
-        });
+        addAButton("View borrowed books information", pane,openViewLoansMenu());
+        addAButton("Close a Loan",pane,openCloseLoanMenu());
     }
 
     private static void addAButton(String text, Container container,ActionListener actionListener) {
@@ -78,6 +75,25 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BookViewer.createAndShowGUI();
+            }
+        };
+        return actionListener;
+    }
+
+    private static ActionListener openViewLoansMenu(){
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoanViewer.createAndShowGUI();
+            }
+        };
+        return actionListener;
+    }
+    private static ActionListener openCloseLoanMenu(){
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoanDeleter.createAndShowGUI();
             }
         };
         return actionListener;
