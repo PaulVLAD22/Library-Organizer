@@ -16,3 +16,6 @@ Java program that lets the user do things like add books, lend books, view loans
 
 <h2>Viewing Books process</h2>
 <img src="https://i.imgur.com/vMZ4zb9.png">
+
+<h2>Viewing Loans</h2>
+<img src="https://i.imgur.com/sx6ZcWi.png">
