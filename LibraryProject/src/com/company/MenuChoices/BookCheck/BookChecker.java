@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class BookChecker {
     public static JFrame bookCheckerFrame;
@@ -57,13 +55,6 @@ public class BookChecker {
         return actionListener;
     }
 
-
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
     public static void createAndShowGUI() {
         //Create and set up the window
         bookCheckerFrame = new JFrame("BoxLayoutDemo");

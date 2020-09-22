@@ -8,8 +8,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.Comparator;
 
 public class LoanViewer {
     private static JFrame bookViewerFrame;
@@ -36,7 +34,6 @@ public class LoanViewer {
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(loanTable);
         bookViewerFrame.add(sp);
-        // Frame Size
 
 
 
@@ -79,13 +76,6 @@ public class LoanViewer {
     }
 
 
-
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
     public static void createAndShowGUI() {
         //Create and set up the window
         bookViewerFrame = new JFrame("BoxLayoutDemo");

@@ -1,6 +1,6 @@
 package com.company.MenuChoices.BookAdders;
 
-import com.company.Objects.Book;
+
 import com.company.ServerPass;
 
 import javax.swing.*;
@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class BookCopiesAdder {
@@ -92,13 +91,6 @@ public class BookCopiesAdder {
         return actionListener;
     }
 
-
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
     public static void createAndShowGUI() {
         //Create and set up the window
         bookAdderFrame = new JFrame("BoxLayoutDemo");

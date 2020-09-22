@@ -107,13 +107,6 @@ public class BookCheckResult {
 
     }
 
-
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
     public static void createAndShowGUI(String bookName, String authorName) {
         //Create and set up the window
         bookCheckResultFrame = new JFrame("BoxLayoutDemo");

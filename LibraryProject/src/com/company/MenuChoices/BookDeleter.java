@@ -1,6 +1,5 @@
 package com.company.MenuChoices;
 
-import com.company.Objects.Book;
 import com.company.ServerPass;
 
 import javax.swing.*;
@@ -105,14 +104,6 @@ public class BookDeleter {
         return actionListener;
     }
 
-
-
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
     public static void createAndShowGUI() {
         //Create and set up the window
         bookDeleteFrame = new JFrame("BoxLayoutDemo");

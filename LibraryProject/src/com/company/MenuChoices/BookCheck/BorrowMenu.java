@@ -6,20 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.Date;
-
-
-
-// CHANGE THIS ENTIRELY THIS IS BOOKADDER
-
-// ADD A FUNCTION THAT ADDS A LOAN OBJECT
-// ALSO CHANGE THE BOOK BOOLEAN ATTRIBUTE onLoan to true
-// also change the numberOfBooks of this book object (by 1)
-
 
 public class BorrowMenu {
     private static Date today;
@@ -113,7 +102,7 @@ public class BorrowMenu {
 
 
                         Calendar returnDate = Calendar.getInstance();
-                        returnDate.add(Calendar.MONTH, Integer.parseInt(loanDurationField.getText())); // same for minutes and seconds
+                        returnDate.add(Calendar.MONTH, Integer.parseInt(loanDurationField.getText()));
                         java.sql.Date aux = new java.sql.Date(returnDate.getTimeInMillis());
                         String dateOfReturn = aux.toString();
                         // calculated the dateOfReturn
@@ -152,13 +141,6 @@ public class BorrowMenu {
         }
     }
 
-
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
     public static void createAndShowGUI(String bookName,String authorName,int numOfBooks) {
         //Create and set up the window
         borrowMenuFrame = new JFrame("BoxLayoutDemo");
